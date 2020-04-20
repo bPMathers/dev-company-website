@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
-    color: 'white',
+    color: 'white'
   },
   menuItem: {
     ...theme.typography.tab,
@@ -109,11 +109,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.orange
   },
   drawerItemSelected: {
-    opacity: 1
+    "& .MuiListItemText-root": {
+      opacity: 1
+    }
   },
+  appBar: {
+    zIndex: theme.zIndex.modal + 1
+  }
 }));
 
-export default function Header(props) {
+export default function Header() {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
@@ -183,6 +188,7 @@ export default function Header(props) {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
         classes={{ paper: classes.drawer }}>
+        <div className={classes.toolbarMargin} />
         <List disablePadding>
           {tabsOptions.map((tabOption, index) => (
             <ListItem
@@ -192,11 +198,12 @@ export default function Header(props) {
               button
               component={Link}
               to={tabOption.link}
-              selected={value === index}>
+              selected={value === index}
+              classes={{ selected: classes.drawerItemSelected }}>
               <ListItemText
                 key="restimateButton"
                 disableTypography
-                className={value === index ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>
+                className={classes.drawerItem}>
                 {tabOption.name}
               </ListItemText>
             </ListItem>
@@ -208,8 +215,9 @@ export default function Header(props) {
             component={Link}
             to="/estimate"
             selected={value === 5}
-            className={classes.drawerItemEstimate}>
-            <ListItemText disableTypography className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}>Free Estimate</ListItemText>
+            classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}
+          >
+            <ListItemText disableTypography className={classes.drawerItem}>Free Estimate</ListItemText>
           </ListItem>
         </List>
       </SwipeableDrawer>
@@ -219,7 +227,7 @@ export default function Header(props) {
         disableRipple>
         <MenuIcon className={classes.drawerIcon} />
       </IconButton>
-    </React.Fragment>
+    </React.Fragment >
   );
 
   const tabs = (
@@ -227,7 +235,8 @@ export default function Header(props) {
       <Tabs
         value={value}
         onChange={handleChange}
-        className={classes.tabContainer}>
+        className={classes.tabContainer}
+        indicatorColor="primary">
         {tabsOptions.map((tabOption, index) => (
           <Tab
             key={`${tabOption}${index}`}
@@ -250,11 +259,12 @@ export default function Header(props) {
         onClose={handleClose}
         classes={{ paper: classes.menu }}
         elevation={0}
+        style={{ zIndex: 1302 }}
         keepMounted
         MenuListProps={{ onMouseLeave: handleClose }}>
         {menuOptions.map((option, index) => (
           <MenuItem
-            key={option}
+            key={`${option}${index}`}
             component={Link}
             to={option.link}
             classes={{ root: classes.menuItem }}
@@ -274,7 +284,7 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <ElevationScroll>
-        <AppBar position="fixed">
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar disableGutters>
             <Button
               disableRipple
@@ -291,4 +301,5 @@ export default function Header(props) {
       <div className={classes.toolbarMargin} />
     </React.Fragment>
   );
-}
+};
+
