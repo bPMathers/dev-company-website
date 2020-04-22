@@ -68,12 +68,15 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 10,
     marginLeft: '25px',
   },
-  button: {
+  estimateButton: {
     ...theme.typography.estimate,
     borderRadius: '50px',
     marginLeft: '50px',
     marginRight: '25px',
     height: '45px',
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light
+    }
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
@@ -248,7 +251,7 @@ export default function Header({ value, setValue, selectedIndex, setSelectedInde
             onMouseOver={tabOption.mouseOver} />
         ))}
       </Tabs>
-      <Button variant="contained" color="secondary" className={classes.button}>
+      <Button variant="contained" color="secondary" className={classes.estimateButton}>
         Free estimate
       </Button>
       <Menu
