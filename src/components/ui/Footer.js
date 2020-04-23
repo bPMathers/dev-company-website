@@ -87,7 +87,7 @@ export default function Footer({ value, setValue, selectedIndex, setSelectedInde
                 Custom Software Development
             </Grid>
               <Grid item component={Link} to="/mobileapps" className={classes.link} onClick={() => { setValue(1); setSelectedIndex(2) }}>
-                Mobile App Development
+                iOS/Android Development
             </Grid>
               <Grid item component={Link} to="/websites" className={classes.link} onClick={() => { setValue(1); setSelectedIndex(3) }}>
                 Website Development

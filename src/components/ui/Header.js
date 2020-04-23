@@ -155,7 +155,7 @@ export default function Header({ value, setValue, selectedIndex, setSelectedInde
   const menuOptions = [
     { link: "/services", name: "Services" },
     { link: "/customsoftware", name: "Custom Software Development" },
-    { link: "/mobileapps", name: "Mobile App Development" },
+    { link: "/mobileapps", name: "iOS/Android Development" },
     { link: "/websites", name: "websites" }
   ];
   const tabsOptions = [
